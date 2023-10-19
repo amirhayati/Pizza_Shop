@@ -1,5 +1,3 @@
-'use client'
-
 import Navbar from '@/components/navbar'
 import Slider from '@/components/slider'
 import Product from '@/components/product'
