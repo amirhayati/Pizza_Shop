@@ -1,11 +1,11 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
-import { CartProvider } from '../contex/CartCotext'
+import { CartProvider } from '@/context/CartContext'
 
 export const metadata: Metadata = {
-  title: 'Booking Hostel',
-  description: 'Booking Hostel',
+  title: 'pizza shopping',
+  description: 'pizza shopping',
 }
 
 const font = Nunito ({

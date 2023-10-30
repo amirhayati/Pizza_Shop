@@ -3,7 +3,7 @@
 import React,{useState} from 'react'
 import Link from 'next/link'
 import {AiOutlineShoppingCart, AiOutlineUser, AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
-import { useCart } from '../contex/CartCotext'
+import { useCart } from '@/context/CartContext'
 
 const navItem = [
   {id:10,name:'HomePage',link:'./'},
@@ -15,7 +15,7 @@ const navItem = [
 ]
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   
   const { cartItems } = useCart();
   
@@ -57,7 +57,7 @@ export default function Navbar() {
           <div className='hidden md:flex center flex-row gap-4'>
             <Link 
               className='text-white text-lg border-b-2 border-b-transparent hover:border-b-white' 
-              href={'/Login'}
+              href={'/login'}
             >
               Login
             </Link> 

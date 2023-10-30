@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import {GrPrevious, GrNext} from 'react-icons/gr'
-import pizza1 from '../assets/pic/pizza1.png'
+import pizza1 from '@/assets/pic/pizza1.png'
+import pizza2 from '@/assets/pic/pizza2.png'
 
 const list = [
     {name:'PIZZA ',desc:'Hot & spicy',offer:'50% OFF ORDER NOW',img:pizza1},
@@ -50,3 +51,5 @@ export default function Slider() {
     </div>
   )
 }
+
+

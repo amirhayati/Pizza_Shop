@@ -1,32 +1,47 @@
 "use client";
 
 import React, { useState } from 'react'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import { usePathname } from 'next/navigation';
-import { useCart } from '../../contex/CartCotext'
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
-import pizza from '../../assets/pic/pizza2.png'
-import {list} from '../../assets/data/list'
+import { useCart } from '@/context/CartContext'
+import pizza from '@/assets/pic/pizza2.png'
+import {list} from '@/assets/data/list'
+
+type ProductSize = "s" | "m" | "l" ;
+type ProductSauce = "spicy"|"garlic" ;
+type CartItemType = {
+  id?: number;
+  pid?: number;
+  name?: string;
+  desc?: string;
+  img?: StaticImageData;
+  count?: number;
+  price?: number;
+  size?: ProductSize;
+  sauce?: ProductSauce;
+};
+
 
 export default function AboutProduct() {
 
   const {addToCart, incCount, decCount, count} = useCart();
 
   const newList = list[0];
-  const [size,setSize] = useState('s')
-  const [price,setPrice] = useState(newList.s_price)
-  const [sauce,setSauce] = useState('')
-  const [productId,setProductId] = useState(1000)
-  
-  const pathname = usePathname()
-  // --- pathname is /id so use subString to access second argoman ---
+  const [size,setSize] = useState<ProductSize>('s')
+  const [price,setPrice] = useState<number>(parseInt(newList.s_price))
+  const [sauce,setSauce] = useState<ProductSauce>()
+  const [productId,setProductId] = useState<number>(1000)
+ 
+
+  // const pathname = usePathname()
+  // --- pathname is /id so use subString to access second params ---
   // const productId = Number(pathname.substring(1,2))
 
   const handlerAddToCard = () => {
     setProductId((prev)=> prev + 1)
 
-    const newCartItem = {};
+    const newCartItem : CartItemType = {};
+
     newCartItem.id = newList.id;
     newCartItem.pid = productId;
     newCartItem.name = newList.name;
@@ -36,29 +51,30 @@ export default function AboutProduct() {
     newCartItem.price = price;
     newCartItem.size = size;
     newCartItem.sauce = sauce;
+    console.log(newCartItem)
     addToCart(newCartItem, count)
   }
-  
+
   const handlerIncBtn = () => {
     incCount();
   }
 
   const handlerDecBtn = () => {
-    decCount();
+    count > 1 && decCount();
   }
   
-  function selectSize(params:string) {
+  function selectSize(params:ProductSize) {
     setSize(params)
 
     switch (params) {
       case 's':
-        setPrice(newList.s_price)
+        setPrice(parseInt(newList.s_price))
         break;
       case 'm':
-        setPrice(newList.m_price)
+        setPrice(parseInt(newList.m_price))
         break;
       case 'l':
-        setPrice(newList.l_price)
+        setPrice(parseInt(newList.l_price))
         break;
     
       default:
@@ -70,15 +86,14 @@ export default function AboutProduct() {
   //   setCheckProductInArr(list.find((item) => item.id === productId))
   // },[])
   
-  function selectSauce(params:string) {
-    setSauce(params)
+  function selectSauce(params:ProductSauce) {
+    sauce === params ? setSauce(undefined) : setSauce(params)
   }
 
-  const finalPrice = price ? price : newList.s_price;
+  const finalPrice : number = price ? price : parseInt(newList.s_price);
 
   return (
     <>
-      <Navbar/>
       <div className='grid grid-cols-1 md:grid-cols-2 w-full min-h-[80vh] md:gap-8 p-8'>
 
         <div className='flex-1 h-fit p-2 sm:p-16 flex center'>
@@ -123,7 +138,7 @@ export default function AboutProduct() {
                 style={size === 'l' ? {borderColor: 'rgb(234 ,88 ,12)'} : {}}
                 onClick={()=>selectSize('l')}
               />
-              <p className='text-center rounded-full bg-green-800 text-white text-xs select-none'>Larg</p>
+              <p className='text-center rounded-full bg-green-800 text-white text-xs select-none'>Large</p>
             </div>
           </div>
 
@@ -133,12 +148,12 @@ export default function AboutProduct() {
             <span className='gap-1 flex flex-row'>
               <input 
                 type='checkbox' 
-                name='espicy' 
+                name='spicy' 
                 className='text-sm text-gray-500' 
-                onChange={()=> selectSauce('espicy')} 
-                checked={sauce === 'espicy'}
+                onChange={()=> selectSauce('spicy')} 
+                checked={sauce === 'spicy'}
               />
-              <label className='text-sm text-gray-500'>Espicy sauce</label>
+              <label className='text-sm text-gray-500'>spicy sauce</label>
             </span>
             <span className='gap-1 flex flex-row'>
               <input 
@@ -174,7 +189,6 @@ export default function AboutProduct() {
           </button>
         </div>
       </div>
-      <Footer />
     </>
   )
 }

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import Navbar from '@/components/navbar'
 import Image from 'next/image'
-import pizza from '../../assets/pic/pizza2.png'
+import pizza from '@/assets/pic/pizza2.png'
 
 const listP = [
     {id:123123123,name:'SALMON ',price:'12',img:pizza,},

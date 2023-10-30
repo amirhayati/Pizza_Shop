@@ -2,23 +2,19 @@
 
 import React, {Fragment} from 'react'
 import Image from 'next/image'
-import { usePathname, useParams } from 'next/navigation'
-import { useCart } from "../../contex/CartCotext";
+import { useCart } from "@/context/CartContext";
 import {AiOutlineClose} from 'react-icons/ai'
-import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
-import pizza from '../../assets/pic/pizza2.png'
 
 export default function Cart() {
 
-    const { cartItems, toggleCartItemQuanitity, onRemove, totalPrice } = useCart();
+    const { cartItems, toggleCartItemQuantity, onRemove, totalPrice } = useCart();
 
     const handlerDecBtn = (id:Number) => {
-        toggleCartItemQuanitity(id, "dec");
+        toggleCartItemQuantity(id, "dec");
     }
 
     const handlerIncBtn = (id:Number) => {
-        toggleCartItemQuanitity(id, "inc");
+        toggleCartItemQuantity(id, "inc");
     }
 
     const handlerDeleteBox = (pid:Number) => {
@@ -29,11 +25,11 @@ export default function Cart() {
 
     function CartList() {
         return(
-            cartItems.map((item,key)=>(
+            cartItems.map((item:any,key:number)=>(
                 <Fragment key={key}>
                     <Image src={item.img} alt='pizza' className='w-16 '/>
                     <p className='text-xs sm:text-lg text-orange-700 col-span-2 text-center'>{item.name}</p>
-                    <p className='text-xs sm:text-lg'>{item.size === 's' ? "Small" : item.size === 'm' ? "Medium" : "Larg"}</p>
+                    <p className='text-xs sm:text-lg'>{item.size === 's' ? "Small" : item.size === 'm' ? "Medium" : "Large"}</p>
                     <p className='text-xs sm:text-lg'>{!item.sauce ? "---" : item.sauce}</p>
                     <p className='text-xs sm:text-lg'>${item.price}</p>
                     <div className='flex flex-row'>
@@ -52,8 +48,6 @@ export default function Cart() {
 
     return (
         <div>
-            <Navbar />
-
             <div className='w-full flex flex-col lg:flex-row px-2 md:px-24 py-6 gap-8 lg:gap-2'>
 
                 {
@@ -99,8 +93,6 @@ export default function Cart() {
                     </div>
                 </div>
             </div>
-
-            <Footer />
         </div>
     )
 }

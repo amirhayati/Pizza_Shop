@@ -1,8 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import pizza from '../assets/pic/pizza2.png'
-import {list} from '../assets/data/list'
+import {list} from '@/assets/data/list'
 
 
 function ProductItem() {
@@ -35,5 +34,6 @@ export default function Product() {
     </div>
   )
 }
+
 
 
