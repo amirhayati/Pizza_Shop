@@ -9,12 +9,12 @@ export default function Cart() {
 
     const { cartItems, toggleCartItemQuantity, onRemove, totalPrice } = useCart();
 
-    const handlerDecBtn = (id:Number) => {
-        toggleCartItemQuantity(id, "dec");
+    const handlerDecBtn = (PID:Number) => {
+        toggleCartItemQuantity(PID, "dec");
     }
 
-    const handlerIncBtn = (id:Number) => {
-        toggleCartItemQuantity(id, "inc");
+    const handlerIncBtn = (PID:Number) => {
+        toggleCartItemQuantity(PID, "inc");
     }
 
     const handlerDeleteBox = (pid:Number) => {
@@ -22,7 +22,7 @@ export default function Cart() {
             onRemove(pid)  
         }, 100);
     }
-
+console.log(cartItems)
     function CartList() {
         return(
             cartItems.map((item:any,key:number)=>(

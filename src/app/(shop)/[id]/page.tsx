@@ -2,16 +2,16 @@
 
 import React, { useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
-import { usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext'
 import pizza from '@/assets/pic/pizza2.png'
 import {list} from '@/assets/data/list'
+import { useParams } from 'next/navigation';
 
 type ProductSize = "s" | "m" | "l" ;
-type ProductSauce = "spicy"|"garlic" ;
+type ProductSauce = "spicy"|"garlic"|"noSauce" ;
 type CartItemType = {
   id?: number;
-  pid?: number;
+  pid?: string;
   name?: string;
   desc?: string;
   img?: StaticImageData;
@@ -24,26 +24,24 @@ type CartItemType = {
 
 export default function AboutProduct() {
 
-  const {addToCart, incCount, decCount, count} = useCart();
+  const {addToCart, incCount, decCount, count, productID} = useCart();
 
-  const newList = list[0];
+  const params:any = useParams();
+  const newList = list[params.id-1]
+  
   const [size,setSize] = useState<ProductSize>('s')
   const [price,setPrice] = useState<number>(parseInt(newList.s_price))
-  const [sauce,setSauce] = useState<ProductSauce>()
-  const [productId,setProductId] = useState<number>(1000)
- 
+  const [sauce,setSauce] = useState<ProductSauce>('noSauce')
 
   // const pathname = usePathname()
   // --- pathname is /id so use subString to access second params ---
   // const productId = Number(pathname.substring(1,2))
 
   const handlerAddToCard = () => {
-    setProductId((prev)=> prev + 1)
-
     const newCartItem : CartItemType = {};
 
     newCartItem.id = newList.id;
-    newCartItem.pid = productId;
+    newCartItem.pid = newList.id + size + sauce;
     newCartItem.name = newList.name;
     newCartItem.desc = newList.desc;
     newCartItem.img = newList.img?newList.img:pizza;
@@ -51,7 +49,6 @@ export default function AboutProduct() {
     newCartItem.price = price;
     newCartItem.size = size;
     newCartItem.sauce = sauce;
-    console.log(newCartItem)
     addToCart(newCartItem, count)
   }
 
@@ -87,7 +84,7 @@ export default function AboutProduct() {
   // },[])
   
   function selectSauce(params:ProductSauce) {
-    sauce === params ? setSauce(undefined) : setSauce(params)
+    sauce === params ? setSauce('noSauce') : setSauce(params)
   }
 
   const finalPrice : number = price ? price : parseInt(newList.s_price);

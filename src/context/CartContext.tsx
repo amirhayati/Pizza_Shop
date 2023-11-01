@@ -1,37 +1,28 @@
 "use client"
 
-import { StaticImageData } from "next/image";
 import { createContext, useContext, useState } from "react";
-
-interface ProductType {
-  product: Array<string|number|StaticImageData>;
-  count: number;
-}
-interface QuantityType {
-  id: number;
-  value: "inc" | "dec";
-}
 
 const CartContext = createContext<any>(null);
 
-export const CartProvider = ({ children }:any) => {
-  const [cartItems, setCartItems] = useState<(string|number)[]>([]);
+export const CartProvider = ({ children } : any) => {
+  const [cartItems, setCartItems] = useState<any>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [count, setCount] = useState<number>(1);
+  
+  const addToCart = (product:any, count:number) => {
 
-  const addToCart = ({product, count}:ProductType) => {
     const checkProductInCart = cartItems.find((item:any) => item.id === product.id);
     const checkProductSizeInCart = cartItems.find((item:any) => item.size === product.size);
     const checkProductSauceInCart = cartItems.find((item:any) => item.sauce === product.sauce);
 
-    // setTotalPrice((prevTotalPrice) => prevTotalPrice + parseInt(product.price) * count);
+    setTotalPrice((prevTotalPrice) => prevTotalPrice + parseInt(product.price) * count);
     setTotalCount((prevTotalCount) => prevTotalCount + count);
 
     // ------ use size and sauce if user select same product id whit different size or sauce ------
     if (checkProductInCart && checkProductSizeInCart && checkProductSauceInCart) {
       const updatedCartItems : Array<string | number> = cartItems.map((item:any) => {
-        if (item.id === product.id)
+        if (item.pid === product.pid)
           return {
             ...item,
             count: item.count + count,
@@ -59,9 +50,9 @@ export const CartProvider = ({ children }:any) => {
   };
 
   // ------- inc or dec cart Item list -------
-  const toggleCartItemQuantity = ({id, value} : QuantityType) => {
-    const foundProduct:any = cartItems.find((item:any) => item.pid === id);
-    const index = cartItems.findIndex((product:any) => product.pid === id);
+  const toggleCartItemQuantity = (PID:number, value:"inc" | "dec") => {
+    const foundProduct = cartItems.find((item:any) => item.pid === PID);
+    const index = cartItems.findIndex((product:any) => product.pid === PID);
 
     if (value === "inc") {
       setCartItems([...cartItems.slice(0, index), { ...foundProduct, count: foundProduct.count + 1 }, ...cartItems.slice(index + 1)]);
@@ -83,18 +74,6 @@ export const CartProvider = ({ children }:any) => {
   const decCount = () => {
     setCount((prevCount) => prevCount - 1);
   };
-
-  // ----- add item to localStorage -----
-  // useEffect(() => {
-  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  // }, [cartItems]);
-
-  // useEffect(() => {
-  //   const cartItems = localStorage.getItem("cartItems");
-  //   if (cartItems) {
-  //     setCartItems(JSON.parse(cartItems));
-  //   }
-  // }, []);
   
   return (
     <CartContext.Provider

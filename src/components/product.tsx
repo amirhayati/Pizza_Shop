@@ -11,6 +11,7 @@ function ProductItem() {
                 className='w-full flex-col flex center gap-3 cursor-pointer hover:bg-orange-100 p-4 duration-500'
                 href={{
                     pathname: `/${item.id}`,
+                    query: {id:item.id}
                 }}
                 key={key}
             >
