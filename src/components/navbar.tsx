@@ -2,7 +2,7 @@
 
 import React,{useState} from 'react'
 import Link from 'next/link'
-import {AiOutlineShoppingCart, AiOutlineUser, AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
+import {AiOutlineShoppingCart, AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
 import { useCart } from '@/context/CartContext'
 
 const navItem = [
@@ -83,14 +83,14 @@ export default function Navbar() {
 
       {/* ----- drawer ----- */}
       <div 
-        className='flex fixed w-full h-full top-0 z-[100] flex-row' 
+        className='flex fixed w-full h-full top-0 z-[100] flex-row overflow-hidden justify-between' 
         style={mobileOpen ? {visibility: 'visible'} : {visibility: 'hidden'}}
       >
         <div 
-          className='flex flex-col center pt-8 gap-8 w-1/3 bg-orange-800 shadow-2xl border-r-2 border-orange-800 duration-700 overflow-y-scroll' 
+          className='flex flex-col center gap-8 w-2/3 max-w-xs bg-orange-800 shadow-2xl border-r-2 border-orange-800 duration-700 overflow-y-auto overflow-ellipsis' 
           style={mobileOpen ? {marginLeft:'0'} : {marginLeft:'-40vw'}}
         >
-          <div className='flex flex-row fixed top-0 bg-orange-800'>
+          <div className='flex flex-row fixed top-0 bg-orange-800 overflow-hidden'>
             <div 
               className='p-4 left-0 cursor-pointer duration-300' 
               style={mobileOpen ? {opacity: '1'} : {opacity: '0'}}
@@ -99,7 +99,7 @@ export default function Navbar() {
               <AiOutlineClose size='2rem' color='white'/>
             </div>
 
-            <div className='top-0 p-5'>
+            <div className='flex items-center'>
               <h2 className='text-lg text-white'>
                 LamaLogo
               </h2>

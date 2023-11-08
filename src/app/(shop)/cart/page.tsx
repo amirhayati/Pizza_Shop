@@ -22,7 +22,7 @@ export default function Cart() {
             onRemove(pid)  
         }, 100);
     }
-console.log(cartItems)
+
     function CartList() {
         return(
             cartItems.map((item:any,key:number)=>(
@@ -30,7 +30,7 @@ console.log(cartItems)
                     <Image src={item.img} alt='pizza' className='w-16 '/>
                     <p className='text-xs sm:text-lg text-orange-700 col-span-2 text-center'>{item.name}</p>
                     <p className='text-xs sm:text-lg'>{item.size === 's' ? "Small" : item.size === 'm' ? "Medium" : "Large"}</p>
-                    <p className='text-xs sm:text-lg'>{!item.sauce ? "---" : item.sauce}</p>
+                    <p className='text-xs sm:text-lg'>{item.sauce}</p>
                     <p className='text-xs sm:text-lg'>${item.price}</p>
                     <div className='flex flex-row'>
                         <p className='pl-2 pr-2 p-1 w-fit h-fit bg-gray-200 rounded-l-lg ring-1 ring-gray-400 hover:bg-gray-100 duration-700 cursor-pointer select-none' onClick={()=> handlerDecBtn(item.pid)}>{'<'}</p>
@@ -48,7 +48,7 @@ console.log(cartItems)
 
     return (
         <div>
-            <div className='w-full flex flex-col lg:flex-row px-2 md:px-24 py-6 gap-8 lg:gap-2'>
+            <div className='w-full flex flex-col lg:flex-row justify-around px-2 lg:px-24 py-6 gap-2'>
 
                 {
                     cartItems.length > 0 ?
