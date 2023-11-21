@@ -4,19 +4,20 @@ import React,{useState} from 'react'
 import Link from 'next/link'
 import {AiOutlineShoppingCart, AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
 import { useCart } from '@/context/CartContext'
+import { usePathname } from 'next/navigation'
 
 const navItem = [
-  {id:10,name:'HomePage',link:'./'},
-  {id:11,name:'Product',link:'./'},
-  {id:12,name:'Menu',link:'./'},
-  {id:13,name:'Event',link:'./'},
-  {id:14,name:'Blog',link:'./'},
-  {id:15,name:'Contact',link:'./'},
+  {id:10,name:'HomePage',link:'/'},
+  {id:11,name:'Product',link:'/product'},
+  {id:12,name:'Menu',link:'/menu'},
+  {id:13,name:'Event',link:'#'},
+  {id:14,name:'Blog',link:'#'},
+  {id:15,name:'Contact',link:'#'},
 ]
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
-  
+  const currentPath = usePathname()
   const { cartItems } = useCart();
   
   const handleDrawerToggle = () => {
@@ -26,7 +27,7 @@ export default function Navbar() {
   const NavList = () => {
     return(
       navItem.map((item,key)=>(
-        <Link key={item.id} href={item.link} className='text-sm border-b-2 border-b-transparent hover:border-b-white duration-500 text-white'>
+        <Link key={key} href={item.link} className={`${item.link == currentPath ? 'border-b-white' : 'border-b-transparent'} text-sm border-b-2 hover:border-b-white duration-500 text-white`}>
           {item.name}
         </Link>
       ))
@@ -36,7 +37,7 @@ export default function Navbar() {
   const NavListPhoneSize = () => {
     return(
       navItem.map((item,key)=>(
-        <Link key={key} href={item.link} className='text-lg border-b-2 border-b-transparent text-white hover:border-b-white duration-500'>
+        <Link key={key} href={item.link} className={`${item.link == currentPath ? 'border-b-white' : 'border-b-transparent'} text-lg border-b-2 border-b-transparent text-white hover:border-b-white duration-500`}>
           {item.name}
         </Link>
       ))

@@ -7,3 +7,4 @@ export default function Test() {
     console.log(metric)
   })
 }
+

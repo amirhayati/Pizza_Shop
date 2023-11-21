@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
 import { useCart } from '@/context/CartContext'
 import pizza from '@/assets/pic/pizza2.png'
@@ -28,10 +28,14 @@ export default function AboutProduct() {
 
   const params:any = useParams();
   const newList = list[params.id-1]
-  
+
   const [size,setSize] = useState<ProductSize>('s')
-  const [price,setPrice] = useState<number>(parseInt(newList.s_price))
+  const [price,setPrice] = useState<number>()
   const [sauce,setSauce] = useState<ProductSauce>('noSauce')
+
+  useEffect(()=>{
+    setPrice(Number(newList.s_price))
+  },[])
 
   // const pathname = usePathname()
   // --- pathname is /id so use subString to access second params ---
@@ -65,42 +69,36 @@ export default function AboutProduct() {
 
     switch (params) {
       case 's':
-        setPrice(parseInt(newList.s_price))
+        setPrice(Number(newList.s_price))
         break;
       case 'm':
-        setPrice(parseInt(newList.m_price))
+        setPrice(Number(newList.m_price))
         break;
       case 'l':
-        setPrice(parseInt(newList.l_price))
+        setPrice(Number(newList.l_price))
         break;
     
       default:
         break;
     }
   }
-
-  // useEffect(()=>{
-  //   setCheckProductInArr(list.find((item) => item.id === productId))
-  // },[])
   
   function selectSauce(params:ProductSauce) {
     sauce === params ? setSauce('noSauce') : setSauce(params)
   }
-
-  const finalPrice : number = price ? price : parseInt(newList.s_price);
 
   return (
     <>
       <div className='grid grid-cols-1 md:grid-cols-2 w-full min-h-[80vh] md:gap-8 p-8'>
 
         <div className='flex-1 h-fit p-2 sm:p-16 flex center'>
-          {/* <Image src={newList.img} alt='pic' className='md:w-full w-1/2'/> */}
+          <Image src={newList.img} alt='pic' className='md:w-full w-1/2'/>
         </div>
 
         <div className='flex-1 h-fit flex gap-4 flex-col p-8 md:p-0'>
           <p className='text-2xl font-bold text-orange drop-shadow-md'>{newList.name}</p>
 
-          <p className='text-lg text-orange underline'>{finalPrice}$</p>
+          <p className='text-lg text-orange underline'>{price}$</p>
           
           <p className='text-sm text-gray-500'>{newList.desc}</p>
           
@@ -171,7 +169,7 @@ export default function AboutProduct() {
           </div>
 
           <div className=''>
-            <p className='font-bold text-sm duration-1000 trans'>Total Price : {finalPrice * count}$</p>
+            <p className='font-bold text-sm duration-1000 trans'>Total Price : {Number(price) * count}$</p>
             <p className='font-bold text-sm'></p>
           </div>
           <button 

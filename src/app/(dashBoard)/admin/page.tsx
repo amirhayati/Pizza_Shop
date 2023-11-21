@@ -1,14 +1,36 @@
-import React, { Fragment } from 'react'
+'use client'
+
+import React, { Fragment,useEffect } from 'react'
 import Navbar from '@/components/navbar'
 import Image from 'next/image'
 import pizza from '@/assets/pic/pizza2.png'
 
+import { PrismaClient } from '@prisma/client'
 const listP = [
     {id:123123123,name:'SALMON ',price:'12',img:pizza,},
     {id:123123123,name:'SALMON ',price:'12',img:pizza,},
 ]
 
 function ProductShow() {
+    useEffect(()=>{
+
+        const prisma = new PrismaClient()
+        
+        async function main() {
+          const hana = await prisma.user.create({
+            data: {
+              email: 'hana@hana.io',
+            },
+          })
+        
+          console.log(hana)
+        }
+        
+        main()
+          .catch(console.error)
+          .finally(() => prisma.$disconnect())
+        
+    },[])
     return(
         listP.map((item,key)=>(
             <Fragment key={key}>
