@@ -27,7 +27,7 @@ function SliderComponent() {
 
 export default function Slider() {
   return (
-    <div id="indicators-carousel" className="relative w-full h-[95vh] orange" data-carousel="static">
+    <div id="indicators-carousel" className="relative w-full h-[95vh] orange shadow-lg overflow-hidden" data-carousel="static">
         {/* <!-- Carousel wrapper --> */}
         <SliderComponent/>
         {/* <!-- Slider indicators --> */}

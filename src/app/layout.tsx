@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
-import { CartProvider } from '@/context/CartContext'
+import { CartProvider } from '../context/CartContext'
 
 export const metadata: Metadata = {
   title: 'pizza shopping',

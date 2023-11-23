@@ -3,7 +3,7 @@
 import React,{useState} from 'react'
 import Link from 'next/link'
 import {AiOutlineShoppingCart, AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
-import { useCart } from '@/context/CartContext'
+import { useCart } from '../context/CartContext'
 import { usePathname } from 'next/navigation'
 
 const navItem = [

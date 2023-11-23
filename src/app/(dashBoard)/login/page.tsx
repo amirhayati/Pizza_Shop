@@ -1,8 +1,8 @@
 'use client'
 
-import React,{ReactElement, ReactEventHandler, ReactHTML, ReactNode, useState} from 'react'
-import LoginBox from '@/components/loginBox'
-import SignUpBox from '@/components/signUpBox'
+import React,{useState} from 'react'
+import LoginBox from '../../../components/loginBox'
+import SignUpBox from '../../../components/signUpBox'
 
 export default function Login() {
   const [loginAccount, setLoginAccount] = useState<boolean>(true);

@@ -1,38 +1,14 @@
 'use client'
 
 import React, { Fragment,useEffect } from 'react'
-import Navbar from '@/components/navbar'
+import Navbar from '../../../components/navbar'
 import Image from 'next/image'
-import pizza from '@/assets/pic/pizza2.png'
+import { list } from '@/assets/data/list'
 
-import { PrismaClient } from '@prisma/client'
-const listP = [
-    {id:123123123,name:'SALMON ',price:'12',img:pizza,},
-    {id:123123123,name:'SALMON ',price:'12',img:pizza,},
-]
 
 function ProductShow() {
-    useEffect(()=>{
-
-        const prisma = new PrismaClient()
-        
-        async function main() {
-          const hana = await prisma.user.create({
-            data: {
-              email: 'hana@hana.io',
-            },
-          })
-        
-          console.log(hana)
-        }
-        
-        main()
-          .catch(console.error)
-          .finally(() => prisma.$disconnect())
-        
-    },[])
     return(
-        listP.map((item,key)=>(
+        list.map((item,key)=>(
             <Fragment key={key}>
                 <div className='col-span-7 w-full h-fit border-t-2'/>
                 
@@ -40,7 +16,7 @@ function ProductShow() {
                 <Image className='w-1/2 col-span-1' src={item.img} alt='image'/>
                 <p className='col-span-1'>{item.id}</p>
                 <p className='col-span-2'>{item.name}</p>
-                <p className='col-span-1'>{item.price}</p>
+                <p className='col-span-1'>{item.s_price}</p>
                 <div className='col-span-2 flex justify-evenly w-full'>
                     <button className='h-8 pl-6 pr-6 bg-green-700 text-white rounded-sm duration-700 hover:shadow-xl hover:ring-2 ring-green-700'>Edit</button>
                     <button className='h-8 pl-6 pr-6 bg-red-700 text-white rounded-sm duration-700 hover:shadow-xl hover:ring-2 ring-red-700'>Delete</button>

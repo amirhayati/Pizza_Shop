@@ -2,7 +2,7 @@
 
 import React, {Fragment} from 'react'
 import Image from 'next/image'
-import { useCart } from "@/context/CartContext";
+import { useCart } from "../../../context/CartContext";
 import {AiOutlineClose} from 'react-icons/ai'
 
 export default function Cart() {
