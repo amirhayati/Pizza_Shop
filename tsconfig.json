@@ -19,9 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/context/CartCotext.tsxx", "src/pages/404./404.js", "src/pages/(shop)/[id]/[id].js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/context/CartCotext.tsxx"],
   "exclude": ["node_modules"]
 }
