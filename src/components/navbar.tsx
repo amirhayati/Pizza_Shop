@@ -7,7 +7,7 @@ import { useCart } from '../context/CartContext'
 import { usePathname } from 'next/navigation'
 
 const navItem = [
-  {id:10,name:'HomePage',link:'/'},
+  {id:10,name:'HomePage',link:'/home'},
   {id:11,name:'Product',link:'/product'},
   {id:12,name:'Menu',link:'/menu'},
   {id:13,name:'Event',link:'#'},
