@@ -28,7 +28,7 @@ const Custom = () => {
           </p>
 
           <Link
-            href="/"
+            href="/home"
             className="px-6 py-2 text-sm font-semibold from-red-500 bg-blue-50"
           >
               Go home
