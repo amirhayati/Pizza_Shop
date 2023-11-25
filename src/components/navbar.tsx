@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch, useAppSelector } from '@/redux/store'
 
 const navItem = [
-  {id:10,name:'HomePage',link:'/'},
+  {id:10,name:'HomePage',link:'/home'},
   {id:11,name:'Product',link:'/product'},
   {id:12,name:'Menu',link:'/menu'},
   {id:13,name:'Event',link:'#'},
