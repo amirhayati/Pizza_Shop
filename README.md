@@ -34,7 +34,7 @@ This Repo Contains a Pizza Shopping WebSite Made Using NextJs , Context And Redu
 2. 
 ## ScreenShot
 - Show Pizza List
-![SiteView](src/assets/home.jpg)
+![SiteView](src/assets/homw.jpg)
 <br/><br/>
 
 - Select Product attribute 
