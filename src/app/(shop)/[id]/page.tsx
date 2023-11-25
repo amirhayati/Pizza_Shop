@@ -24,39 +24,39 @@ type CartItemType = {
   sauce?: ProductSauce;
 };
 
-export const getStaticPaths = async () => {
-  const paths = list.map(item =>{
-    return{
-      params: {id: item.id}
-    }
-  })
+// export const getStaticPaths = async () => {
+//   const paths = list.map(item =>{
+//     return{
+//       params: {id: item.id}
+//     }
+//   })
   
-  return {
-    paths,
-    fallback: false
-  }
-}
+//   return {
+//     paths,
+//     fallback: 'blocking'
+//   }
+// }
 
-export const getInitialProps = async (context) => {
-  const { productId } = context;
-  const params:any = useParams();
-  const newList = list[params.productId-1]
-  return {
-     props: { 
-      newList 
-    }
-  }
-}
+// export const getInitialProps = async (context) => {
+//   const { productId } = context;
+//   const params:any = useParams();
+//   const newList = list[params.productId-1]
+//   return {
+//      props: { 
+//       newList 
+//     }
+//   }
+// }
 
 
-// export default function AboutProduct() {
-export default function AboutProduct({newList}) {
+// export default function AboutProduct({newList}) {
+export default function AboutProduct() {
   
   const dispatch = useDispatch<AppDispatch>()
   const count = useAppSelector(state => state.progressSlice.count)
 
-  // const params:any = useParams();
-  // const newList = list[params.id-1]
+  const params:any = useParams();
+  const newList = list[params.id-1]
   
   const [size,setSize] = useState<ProductSize>('s')
   const [price,setPrice] = useState<number>()
