@@ -33,6 +33,13 @@ This Repo Contains a Pizza Shopping WebSite Made Using NextJs , Context And Redu
 1. Run `"npm run dev"` Command
 2. 
 ## ScreenShot
-![SiteView](src/assets/SiteViewHome.jpg)
+- Show Pizza List
+![SiteView](src/assets/Home.jpg)
 <br/><br/>
-![SiteView](src/assets/SiteViewCart.jpg)
+
+- Select Product attribute 
+![SiteView](src/assets/Product.jpg)
+
+<br/><br/>
+- Show Selected Product On Cart
+![SiteView](src/assets/Cart.jpg)
