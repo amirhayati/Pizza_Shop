@@ -2,10 +2,13 @@
 
 import React, { Suspense, useEffect, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
-import { useCart } from '../../../context/CartContext'
 import pizza from '@/assets/pic/pizza2.png'
 import {list} from '@/assets/data/list'
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
+
+import { useDispatch } from 'react-redux'
+import { incCount, decCount, addToCart } from '@/redux/features/progressSlice'
+import { AppDispatch, useAppSelector } from '@/redux/store'
 
 type ProductSize = "s" | "m" | "l" ;
 type ProductSauce = "spicy"|"garlic"|"noSauce" ;
@@ -37,11 +40,12 @@ type CartItemType = {
 
 
 export default function AboutProduct() {
-  const {addToCart, incCount, decCount, count, productID} = useCart();
+  
+  const dispatch = useDispatch<AppDispatch>()
+  const count = useAppSelector(state => state.progressSlice.count)
 
   const params:any = useParams();
   const newList = list[params.id-1]
-  const router = useRouter()
   
   const [size,setSize] = useState<ProductSize>('s')
   const [price,setPrice] = useState<number>()
@@ -67,15 +71,15 @@ export default function AboutProduct() {
     newCartItem.price = price;
     newCartItem.size = size;
     newCartItem.sauce = sauce;
-    addToCart(newCartItem, count)
+    dispatch(addToCart({ArrItem: newCartItem, count: count}))
   }
 
   const handlerIncBtn = () => {
-    incCount();
+    dispatch(incCount());
   }
 
   const handlerDecBtn = () => {
-    count > 1 && decCount();
+    count > 1 && dispatch(decCount());
   }
   
   function selectSize(params:ProductSize) {
