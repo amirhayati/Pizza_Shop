@@ -5,6 +5,7 @@ import Image, { StaticImageData } from 'next/image'
 import pizza from '@/assets/pic/pizza2.png'
 import {list} from '@/assets/data/list'
 import { useParams } from 'next/navigation';
+import { Message } from '@/components/message';
 
 import { useDispatch } from 'react-redux'
 import { incCount, decCount, addToCart } from '@/redux/features/progressSlice'
@@ -61,6 +62,7 @@ export default function AboutProduct() {
   const [size,setSize] = useState<ProductSize>('s')
   const [price,setPrice] = useState<number>()
   const [sauce,setSauce] = useState<ProductSauce>('noSauce')
+  const [showMessage,setShowMessage] = useState<Boolean>(false)
 
   useEffect(()=>{
       if(newList)  setPrice(Number(newList.s_price))
@@ -83,6 +85,8 @@ export default function AboutProduct() {
     newCartItem.size = size;
     newCartItem.sauce = sauce;
     dispatch(addToCart({ArrItem: newCartItem, count: count}))
+
+    setShowMessage(true)
   }
 
   const handlerIncBtn = () => {
@@ -116,8 +120,22 @@ export default function AboutProduct() {
     sauce === params ? setSauce('noSauce') : setSauce(params)
   }
 
+  function handlerMessageVisibility() {
+    setShowMessage(false)
+  }
+
+  useEffect(() => {
+    showMessage &&
+      setTimeout(() => {
+        handlerMessageVisibility()
+      }, 2000);
+  }, [showMessage])
+
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 w-full min-h-[80vh] md:gap-8 p-8'>
+      {
+        showMessage && <Message func={handlerMessageVisibility} productName={newList.name}/>
+      }
       <div className='flex-1 h-fit p-2 sm:p-16 flex center'>
         <Image src={newList.img} alt='pic' className='md:w-full w-1/2'/>
       </div>
