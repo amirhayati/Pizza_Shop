@@ -3,8 +3,9 @@
 import React,{useState} from 'react'
 import Link from 'next/link'
 import {AiOutlineShoppingCart, AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
-import { useCart } from '../context/CartContext'
 import { usePathname } from 'next/navigation'
+import { useDispatch } from 'react-redux'
+import { AppDispatch, useAppSelector } from '@/redux/store'
 
 const navItem = [
   {id:10,name:'HomePage',link:'/home'},
@@ -18,7 +19,9 @@ const navItem = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const currentPath = usePathname()
-  const { cartItems } = useCart();
+  const dispatch = useDispatch<AppDispatch>()
+  const cartItems = useAppSelector(state => state.progressSlice.cartItems)
+
   
   const handleDrawerToggle = () => {
       setMobileOpen(!mobileOpen);

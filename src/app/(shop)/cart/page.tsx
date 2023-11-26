@@ -2,25 +2,28 @@
 
 import React, {Fragment} from 'react'
 import Image from 'next/image'
-import { useCart } from "../../../context/CartContext";
 import {AiOutlineClose} from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
+import { toggleCartItemQuantity, onRemove } from '@/redux/features/progressSlice'
+import { AppDispatch, useAppSelector } from '@/redux/store'
 
 export default function Cart() {
 
-    const { cartItems, toggleCartItemQuantity, onRemove, totalPrice } = useCart();
-
-    const handlerDecBtn = (PID:Number) => {
-        toggleCartItemQuantity(PID, "dec");
+    // const { cartItems, toggleCartItemQuantity, onRemove, totalPrice } = useCart();
+    const dispatch = useDispatch<AppDispatch>()
+    const cartItems = useAppSelector(state => state.progressSlice.cartItems)
+    const totalPrice = useAppSelector(state => state.progressSlice.totalPrice)
+  
+    const handlerDecBtn = (PID:number) => {
+        dispatch(toggleCartItemQuantity({PID: PID, value: "dec"}));
     }
 
-    const handlerIncBtn = (PID:Number) => {
-        toggleCartItemQuantity(PID, "inc");
+    const handlerIncBtn = (PID:number) => {
+        dispatch(toggleCartItemQuantity({PID: PID, value: "inc"}));
     }
 
-    const handlerDeleteBox = (pid:Number) => {
-        setTimeout(() => {
-            onRemove(pid)  
-        }, 100);
+    const handlerDeleteBox = (pid:number) => {
+        dispatch(onRemove(pid)) 
     }
 
     function CartList() {
