@@ -1,4 +1,4 @@
-# Pizza Shopping Application using Next.JS 
+# Pizza Shop Application using Next.JS 
 This Repo Contains a Pizza Shopping WebSite Made Using NextJs , Context And Redux.
 
 ## Preview
