@@ -2,7 +2,7 @@
 This Repo Contains a Pizza Shopping WebSite Made Using NextJs , Context And Redux.
 
 ## Preview
-[amirhayati.github.io/Audio_Shopping_WebSite/](https://amirhayati.github.io/Audio_Shopping_WebSite/)
+[amirhayati.github.io/Audio_Shopping_WebSite/](https://pizza-shop-bay.vercel.app/)
 
 ## TechStack
 - Reactjs
